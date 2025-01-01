@@ -15,7 +15,7 @@ class Animal:
             self._cords[2] = 0
 
     def get_cords(self):
-        print(f'X: {self._cords[0]}, Y: {self._cords[1]}, Z: {self._cords[2]}')
+        print(f'X:{self._cords[0]} Y:{self._cords[1]} Z:{self._cords[2]}')
 
     def attack(self):
         if self._DEGREE_OF_DANGER < 5:
@@ -29,11 +29,17 @@ class Animal:
 class Bird(Animal):
     beak = True
 
+    def __init__(self, speed):
+        super().__init__(speed)
+
     def lay_eggs(self):
         print(f'Here are(is) {random.randint(1,4)} eggs for you')
 
 class AquaticAnimal(Animal):
     _DEGREE_OF_DANGER = 3
+
+    def __init__(self, speed):
+        super().__init__(speed)
 
     def dive_in(self, dz):
         self._cords[2] = self._cords[2] - abs(dz) * int(self.speed // 2)
@@ -41,8 +47,14 @@ class AquaticAnimal(Animal):
 class PoisonousAnimal(Animal):
     _DEGREE_OF_DANGER = 8
 
+    def __init__(self, speed):
+        super().__init__(speed)
+
 class Duckbill(PoisonousAnimal, Bird, AquaticAnimal):
     sound = "Click-click-click"
+
+    def __init__(self, speed):
+        super().__init__(speed)
 
 db = Duckbill(10)
 
